@@ -3,7 +3,7 @@
 *                                              uC/OS-II
 *                                        The Real-Time Kernel
 *
-*                    Copyright 1992-2020 Silicon Laboratories Inc. www.silabs.com
+*                    Copyright 1992-2021 Silicon Laboratories Inc. www.silabs.com
 *
 *                                 SPDX-License-Identifier: APACHE-2.0
 *
@@ -21,7 +21,7 @@
 *                                          Renesas V850ES Port
 *
 * Filename  : os_cpu_c.c
-* Version   : V2.93.00
+* Version   : V2.93.01
 *********************************************************************************************************
 * For       : Renesas V850ES
 * Toolchain : PM+ v6.32
@@ -39,9 +39,9 @@
 *********************************************************************************************************
 */
 
-#define		V850ES_EIPSW_EN				0x00000000u
-#define     V850ES_CTPC					0x00000000u
-#define     V850ES_CTPSW				0x00000000u
+#define        V850ES_EIPSW_EN                0x00000000u
+#define     V850ES_CTPC                    0x00000000u
+#define     V850ES_CTPSW                0x00000000u
 
 /*
 *********************************************************************************************************
@@ -233,47 +233,47 @@ void  OSTaskStatHook (void)
 
 OS_STK *OSTaskStkInit (void (*task)(void *p_arg), void *p_arg, OS_STK *ptos, INT16U opt)
 {
-	OS_STK *stk;
+    OS_STK *stk;
 
 
 
-	opt		 = opt;					    /* 'opt' is not used, prevent warning.                        */
-	stk      = ptos;    				/* Load stack pointer.                                        */
-	*(stk)   =(INT32U)V850ES_CTPSW;		/* CTPSW.   									   		      */
-	*(--stk) =(INT32U)V850ES_CTPC;		/* CTPC.     									   		      */
-	*(--stk) =(INT32U)V850ES_EIPSW_EN;	/* EIPSW interrupt enable						   		      */
-	*(--stk) =(INT32U)task;				/* EIPC     									   		      */
-	*(--stk) =(INT32U)OS_TaskReturn;	/* r31 Link Pointer (LP). to pass return address of function  */
-	*(--stk) =(INT32U)0x30303030;		/* r30 Element Pointer (EP).        						  */
-	*(--stk) =(INT32U)0x29292929;		/* r29 Used as area for register variable   			      */
-	*(--stk) =(INT32U)0x28282828;		/* r28 														  */
-	*(--stk) =(INT32U)0x27272727;		/* r27 														  */
-	*(--stk) =(INT32U)0x26262626;		/* r26 														  */
-	*(--stk) =(INT32U)0x25252525;		/* r25 														  */
-	*(--stk) =(INT32U)0x24242424;		/* r24 														  */
-	*(--stk) =(INT32U)0x23232323;		/* r23 														  */
-	*(--stk) =(INT32U)0x22222222;		/* r22 														  */
-	*(--stk) =(INT32U)0x21212121;		/* r21 														  */
-	*(--stk) =(INT32U)0x20202020;		/* r20 Used as area for register variable   			      */
-	*(--stk) =(INT32U)0x19191919;		/* r19 Working register 									  */
-	*(--stk) =(INT32U)0x18181818;		/* r18 Working register										  */
-	*(--stk) =(INT32U)0x17171717;		/* r17 Working register										  */
-	*(--stk) =(INT32U)0x16161616;		/* r16 Working register										  */
-	*(--stk) =(INT32U)0x15151515;		/* r15 Working register										  */
-	*(--stk) =(INT32U)0x14141414;		/* r14 Working register 									  */
-	*(--stk) =(INT32U)0x13131313;		/* r13 Working register									      */
-	*(--stk) =(INT32U)0x12121212;		/* r12 Working register										  */
-	*(--stk) =(INT32U)0x11111111;		/* r11 Working register 									  */
-	*(--stk) =(INT32U)0x10101010;		/* r10 Function return value								  */
-	*(--stk) =(INT32U)0x09090909;		/* r9  Argument register     	  							  */
-	*(--stk) =(INT32U)0x08080808;		/* r8  Argument register									  */
-	*(--stk) =(INT32U)0x07070707;		/* r7  Argument register									  */
-	*(--stk) =(INT32U)p_arg	;			/* r6  Argument register     						          */
-	*(--stk) =(INT32U)0x02020202;		/* r2 													      */
-	*(--stk) =(INT32U)0x01010101;		/* r1  Assembler-reserved.Used for address generation         */
+    opt         = opt;                        /* 'opt' is not used, prevent warning.                        */
+    stk      = ptos;                    /* Load stack pointer.                                        */
+    *(stk)   =(INT32U)V850ES_CTPSW;        /* CTPSW.                                                        */
+    *(--stk) =(INT32U)V850ES_CTPC;        /* CTPC.                                                          */
+    *(--stk) =(INT32U)V850ES_EIPSW_EN;    /* EIPSW interrupt enable                                         */
+    *(--stk) =(INT32U)task;                /* EIPC                                                          */
+    *(--stk) =(INT32U)OS_TaskReturn;    /* r31 Link Pointer (LP). to pass return address of function  */
+    *(--stk) =(INT32U)0x30303030;        /* r30 Element Pointer (EP).                                  */
+    *(--stk) =(INT32U)0x29292929;        /* r29 Used as area for register variable                     */
+    *(--stk) =(INT32U)0x28282828;        /* r28                                                           */
+    *(--stk) =(INT32U)0x27272727;        /* r27                                                           */
+    *(--stk) =(INT32U)0x26262626;        /* r26                                                           */
+    *(--stk) =(INT32U)0x25252525;        /* r25                                                           */
+    *(--stk) =(INT32U)0x24242424;        /* r24                                                           */
+    *(--stk) =(INT32U)0x23232323;        /* r23                                                           */
+    *(--stk) =(INT32U)0x22222222;        /* r22                                                           */
+    *(--stk) =(INT32U)0x21212121;        /* r21                                                           */
+    *(--stk) =(INT32U)0x20202020;        /* r20 Used as area for register variable                     */
+    *(--stk) =(INT32U)0x19191919;        /* r19 Working register                                       */
+    *(--stk) =(INT32U)0x18181818;        /* r18 Working register                                          */
+    *(--stk) =(INT32U)0x17171717;        /* r17 Working register                                          */
+    *(--stk) =(INT32U)0x16161616;        /* r16 Working register                                          */
+    *(--stk) =(INT32U)0x15151515;        /* r15 Working register                                          */
+    *(--stk) =(INT32U)0x14141414;        /* r14 Working register                                       */
+    *(--stk) =(INT32U)0x13131313;        /* r13 Working register                                          */
+    *(--stk) =(INT32U)0x12121212;        /* r12 Working register                                          */
+    *(--stk) =(INT32U)0x11111111;        /* r11 Working register                                       */
+    *(--stk) =(INT32U)0x10101010;        /* r10 Function return value                                  */
+    *(--stk) =(INT32U)0x09090909;        /* r9  Argument register                                         */
+    *(--stk) =(INT32U)0x08080808;        /* r8  Argument register                                      */
+    *(--stk) =(INT32U)0x07070707;        /* r7  Argument register                                      */
+    *(--stk) =(INT32U)p_arg    ;            /* r6  Argument register                                       */
+    *(--stk) =(INT32U)0x02020202;        /* r2                                                           */
+    *(--stk) =(INT32U)0x01010101;        /* r1  Assembler-reserved.Used for address generation         */
 
 
-	return (stk);
+    return (stk);
 }
 
 /*

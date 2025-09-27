@@ -3,7 +3,7 @@
 *                                              uC/OS-II
 *                                        The Real-Time Kernel
 *
-*                    Copyright 1992-2020 Silicon Laboratories Inc. www.silabs.com
+*                    Copyright 1992-2021 Silicon Laboratories Inc. www.silabs.com
 *
 *                                 SPDX-License-Identifier: APACHE-2.0
 *
@@ -21,7 +21,7 @@
 *                                          LATTICEMICO32 Port
 *
 * Filename  : os_cpu_a.s
-* Version   : V2.93.00
+* Version   : V2.93.01
 *********************************************************************************************************
 * For       : LatticeMico32
 * Toolchain : GNU C/C++ Compiler
@@ -120,9 +120,9 @@ OS_CPU_SR_Restore:
 OSIntCtxSw:
 OSCtxSw:
     xor     r0,  r0, r0
-    addi    sp, sp, -92                     	/* Create space on the stack                           */
+    addi    sp, sp, -92                         /* Create space on the stack                           */
 
-                                           		/* SAVE CURRENT TASK'S CONTEXT:                        */
+                                                   /* SAVE CURRENT TASK'S CONTEXT:                        */
     sw      (sp+ 4), r11                        /*     Save R11-R27                                    */
     sw      (sp+ 8), r12
     sw      (sp+12), r13
@@ -139,7 +139,7 @@ OSCtxSw:
     sw      (sp+56), r24
     sw      (sp+60), r25
     sw      (sp+64), r26
-    sw      (sp+68), r27               		    /*    Save frame pointer                               */
+    sw      (sp+68), r27                           /*    Save frame pointer                               */
 
 
     sw      (sp+84), r1                         /*    Save r1, which may contain the task argument     */

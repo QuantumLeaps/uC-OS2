@@ -3,7 +3,7 @@
 *                                              uC/OS-II
 *                                        The Real-Time Kernel
 *
-*                    Copyright 1992-2020 Silicon Laboratories Inc. www.silabs.com
+*                    Copyright 1992-2021 Silicon Laboratories Inc. www.silabs.com
 *
 *                                 SPDX-License-Identifier: APACHE-2.0
 *
@@ -21,7 +21,7 @@
 *                                           Renesas RL78 Port
 *
 * Filename : os_cpu.h
-* Version  : V2.93.00
+* Version  : V2.93.01
 *********************************************************************************************************
 * For       : Renesas RL78
 * Toolchain : E2Studios v2.x GNURL78 Compiler v1.x
@@ -100,7 +100,7 @@ typedef unsigned char OS_CPU_SR; /* The status register (SR) is 8-bits wide     
 
 #if      OS_CRITICAL_METHOD == 3
                                                                 /* Disable interrupts                                   */
-#define  OS_ENTER_CRITICAL() 	cpu_sr = __get_interrupt_state();   \
+#define  OS_ENTER_CRITICAL()     cpu_sr = __get_interrupt_state();   \
                                 __asm("DI");
                                                                 /* Enable  interrupts                                   */
 #define  OS_EXIT_CRITICAL()     __set_interrupt_state(cpu_sr);

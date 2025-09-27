@@ -3,7 +3,7 @@
 *                                              uC/OS-II
 *                                        The Real-Time Kernel
 *
-*                    Copyright 1992-2020 Silicon Laboratories Inc. www.silabs.com
+*                    Copyright 1992-2021 Silicon Laboratories Inc. www.silabs.com
 *
 *                                 SPDX-License-Identifier: APACHE-2.0
 *
@@ -21,7 +21,7 @@
 *                                          Renesas V850ES Port
 *
 * Filename  : os_cpu.h
-* Version   : V2.93.00
+* Version   : V2.93.01
 *********************************************************************************************************
 * For       : Renesas V850ES
 * Toolchain : PM+ v6.32
@@ -50,7 +50,7 @@ typedef unsigned char   BOOLEAN;
 typedef unsigned char   INT8U;           /* Unsigned  8 bit quantity                                    */
 typedef signed   char   INT8S;           /* Signed    8 bit quantity                                    */
 typedef unsigned short  INT16U;          /* Unsigned 16 bit quantity                                    */
-typedef signed	 short  INT16S;          /* Signed   16 bit quantity                                    */
+typedef signed     short  INT16S;          /* Signed   16 bit quantity                                    */
 typedef unsigned int    INT32U;          /* Unsiged  32 bit quantity                                    */
 typedef signed   int    INT32S;          /* Signed   32 bit quantity                                    */
 typedef          float  FP32;            /* Single precision floating point                             */
@@ -79,7 +79,7 @@ typedef unsigned short  OS_CPU_SR;       /* Define size of CPU status register  
 *********************************************************************************************************
 */
 
-#define	 OS_CRITICAL_METHOD	   3u
+#define     OS_CRITICAL_METHOD       3u
 
 #if      OS_CRITICAL_METHOD == 1u
 #define  OS_ENTER_CRITICAL()    __DI()             /* Disable Interrupts                                */

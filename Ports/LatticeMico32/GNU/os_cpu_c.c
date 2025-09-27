@@ -3,7 +3,7 @@
 *                                              uC/OS-II
 *                                        The Real-Time Kernel
 *
-*                    Copyright 1992-2020 Silicon Laboratories Inc. www.silabs.com
+*                    Copyright 1992-2021 Silicon Laboratories Inc. www.silabs.com
 *
 *                                 SPDX-License-Identifier: APACHE-2.0
 *
@@ -21,7 +21,7 @@
 *                                          LATTICEMICO32 Port
 *
 * Filename  : os_cpu_c.c
-* Version   : V2.93.00
+* Version   : V2.93.01
 *********************************************************************************************************
 * For       : LatticeMico32
 * Toolchain : GNU C/C++ Compiler
@@ -211,18 +211,18 @@ OS_STK  *OSTaskStkInit (void (*task)(void *pd), void *p_arg, OS_STK *ptos, INT16
 
     _REENT_INIT_PTR(impure_ptr);
 
-                                               	/* Create task frame for stack                         */
+                                                   /* Create task frame for stack                         */
     stk         = (INT32U *)impure_ptr;
     stk         = stk - 23;
-    *(stk + 22) = (INT32U)impure_ptr;         	/* Load value of impure_ptr                            */
-    *(stk + 21) = (INT32U)p_arg;             	/* Load the task-argument                              */
-    *(stk + 17) = (INT32U)impure_ptr;         	/* Load the frame-pointer                              */
-    *(stk + 19) = (INT32U)task;               	/* Load the return-address                             */
-    *(stk + 20) = (INT32U)task;               	/* Load the exception return-address                   */
-    *(stk + 18) = 0x2;                        	/* Set the state of ie to perform an eret with ...     */
-                                              	/* ... interrupts enabled                              */
+    *(stk + 22) = (INT32U)impure_ptr;             /* Load value of impure_ptr                            */
+    *(stk + 21) = (INT32U)p_arg;                 /* Load the task-argument                              */
+    *(stk + 17) = (INT32U)impure_ptr;             /* Load the frame-pointer                              */
+    *(stk + 19) = (INT32U)task;                   /* Load the return-address                             */
+    *(stk + 20) = (INT32U)task;                   /* Load the exception return-address                   */
+    *(stk + 18) = 0x2;                            /* Set the state of ie to perform an eret with ...     */
+                                                  /* ... interrupts enabled                              */
 
-    return ((OS_STK *)stk);                    	/* Return the new top-of-stack                         */
+    return ((OS_STK *)stk);                        /* Return the new top-of-stack                         */
 }
 
 

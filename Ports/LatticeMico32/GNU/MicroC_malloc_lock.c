@@ -1,4 +1,4 @@
-/* 
+/*
  * This file contains implementation for multithread protection
  * when calling malloc/free from MicroC/OS tasks.
  */
@@ -24,22 +24,22 @@ static int __microC_lock_count;
  */
 int InitMallocLock(void)
 {
-	/* initialize lock properties */
-	__microC_lock_owner_id = -1;
-	__microC_lock_count = 0;
+    /* initialize lock properties */
+    __microC_lock_owner_id = -1;
+    __microC_lock_count = 0;
 
 
-	/* 
-	 * Create a semaphore with an initial count of 1 i.e.
-	 * only one task can grab it.
-	 */
-	__microC_lock = OSSemCreate(1);
-	if(__microC_lock == (OS_EVENT *)0)
-		return(1);
+    /*
+     * Create a semaphore with an initial count of 1 i.e.
+     * only one task can grab it.
+     */
+    __microC_lock = OSSemCreate(1);
+    if(__microC_lock == (OS_EVENT *)0)
+        return(1);
 
 
-	/* all done */
-	return(0);
+    /* all done */
+    return(0);
 }
 
 
@@ -51,14 +51,14 @@ int InitMallocLock(void)
  */
 void __malloc_lock(struct _reent *ptr)
 {
-	INT8U err;
+    INT8U err;
 
     if (OSRunning == OS_TRUE) {
-		/* wait for lock to be available */
-		OSSemPend(__microC_lock, 0, &err);
+        /* wait for lock to be available */
+        OSSemPend(__microC_lock, 0, &err);
     }
 
-	return;
+    return;
 }
 
 
@@ -71,9 +71,9 @@ void __malloc_lock(struct _reent *ptr)
 void __malloc_unlock(struct _reent *ptr)
 {
     if(OSRunning == OS_TRUE){
-		OSSemPost( __microC_lock );
-	}
+        OSSemPost( __microC_lock );
+    }
 
-	return;
+    return;
 }
 

@@ -3,7 +3,7 @@
 *                                              uC/OS-II
 *                                        The Real-Time Kernel
 *
-*                    Copyright 1992-2020 Silicon Laboratories Inc. www.silabs.com
+*                    Copyright 1992-2021 Silicon Laboratories Inc. www.silabs.com
 *
 *                                 SPDX-License-Identifier: APACHE-2.0
 *
@@ -21,7 +21,7 @@
 *                                           Renesas M16C Port
 *
 * Filename  : os_cpu_c.c
-* Version   : V2.93.00
+* Version   : V2.93.01
 *********************************************************************************************************
 * For       : Renesas M16C
 * Toolchain : IAR's EW for M16C
@@ -234,14 +234,14 @@ OS_STK  *OSTaskStkInit (void (*task)(void *pd), void *pdata, OS_STK *ptos, INT16
     *pstk16--  = (((INT32U)task      ) & 0x0000FFFF);           /* ... The lowest  bytes  of the PC   register              */
 
                                                                 /* Save registers onto stack frame                          */
-    *pstk16--  = (INT16U)0xFBFB;				                /* ... FB register                                          */
+    *pstk16--  = (INT16U)0xFBFB;                                /* ... FB register                                          */
     *pstk16--  = (INT16U)0x3B3B;                                /* ... SB register                                          */
-    *pstk16--  = (INT16U)0xA1A1;				                /* ... A1 register                                          */
-    *pstk16--  = (INT16U)0xA0A0;				                /* ... A0 register                                          */
-    *pstk16--  = (INT16U)0x3333;				                /* ... R3 register                                          */
-    *pstk16--  = (INT32U)pdata >> 16L;				            /* ... Pass argument in R2 register                         */
-    *pstk16--  = (INT32U)pdata & 0x0000FFFFL;				    /* ... Pass argument in R1 register                         */
-    *pstk16    = (INT16U)0x0000;				                /* ... R0 register                                          */
+    *pstk16--  = (INT16U)0xA1A1;                                /* ... A1 register                                          */
+    *pstk16--  = (INT16U)0xA0A0;                                /* ... A0 register                                          */
+    *pstk16--  = (INT16U)0x3333;                                /* ... R3 register                                          */
+    *pstk16--  = (INT32U)pdata >> 16L;                            /* ... Pass argument in R2 register                         */
+    *pstk16--  = (INT32U)pdata & 0x0000FFFFL;                    /* ... Pass argument in R1 register                         */
+    *pstk16    = (INT16U)0x0000;                                /* ... R0 register                                          */
 
     return ((OS_STK *)pstk16);
 }

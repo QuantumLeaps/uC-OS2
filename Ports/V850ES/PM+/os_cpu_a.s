@@ -2,7 +2,7 @@
 #                                              uC/OS-II
 #                                        The Real-Time Kernel
 #
-#                    Copyright 1992-2020 Silicon Laboratories Inc. www.silabs.com
+#                    Copyright 1992-2021 Silicon Laboratories Inc. www.silabs.com
 #
 #                                 SPDX-License-Identifier: APACHE-2.0
 #
@@ -17,7 +17,7 @@
 #                                          Renesas V850ES Port
 #
 # Filename  : os_cpu_a.s
-# Version   : V2.93.00
+# Version   : V2.93.01
 #********************************************************************************************************
 # For       : Renesas V850ES
 # Toolchain : PM+ v6.32
@@ -98,7 +98,7 @@
 #********************************************************************************************************
 
     .section "TRAP00", text                                     -- TRAP instruction for Context Switching
-    .globl	__trap00
+    .globl    __trap00
 __trap00:
     jr _OSCtxSw
 
@@ -114,96 +114,96 @@ __trap00:
 #********************************************************************************************************
 
                                                                 -- RESTORE PROCESSOR REGISTER
-.macro	POPALL	SP
-	ld.w  STK_OFFSET_R1[SP] , r1
-	ld.w  STK_OFFSET_R6[SP] , r6
-	ld.w  STK_OFFSET_R7[SP] , r7
-	ld.w  STK_OFFSET_R8[SP] , r8
-	ld.w  STK_OFFSET_R9[SP] , r9
-	ld.w  STK_OFFSET_R10[SP], r10
-	ld.w  STK_OFFSET_R11[SP], r11
-	ld.w  STK_OFFSET_R12[SP], r12
-	ld.w  STK_OFFSET_R13[SP], r13
-	ld.w  STK_OFFSET_R14[SP], r14
-	ld.w  STK_OFFSET_R15[SP], r15
-	ld.w  STK_OFFSET_R16[SP], r16
-	ld.w  STK_OFFSET_R17[SP], r17
-	ld.w  STK_OFFSET_R18[SP], r18
-	ld.w  STK_OFFSET_R19[SP], r19
-	ld.w  STK_OFFSET_R20[SP], r20
-	ld.w  STK_OFFSET_R21[SP], r21
-	ld.w  STK_OFFSET_R22[SP], r22
-	ld.w  STK_OFFSET_R23[SP], r23
-	ld.w  STK_OFFSET_R24[SP], r24
-	ld.w  STK_OFFSET_R25[SP], r25
-	ld.w  STK_OFFSET_R26[SP], r26
-	ld.w  STK_OFFSET_R27[SP], r27
-	ld.w  STK_OFFSET_R28[SP], r28
-	ld.w  STK_OFFSET_R29[SP], r29
-	ld.w  STK_OFFSET_R30[SP], r30
-	ld.w  STK_OFFSET_R31[SP], r31
+.macro    POPALL    SP
+    ld.w  STK_OFFSET_R1[SP] , r1
+    ld.w  STK_OFFSET_R6[SP] , r6
+    ld.w  STK_OFFSET_R7[SP] , r7
+    ld.w  STK_OFFSET_R8[SP] , r8
+    ld.w  STK_OFFSET_R9[SP] , r9
+    ld.w  STK_OFFSET_R10[SP], r10
+    ld.w  STK_OFFSET_R11[SP], r11
+    ld.w  STK_OFFSET_R12[SP], r12
+    ld.w  STK_OFFSET_R13[SP], r13
+    ld.w  STK_OFFSET_R14[SP], r14
+    ld.w  STK_OFFSET_R15[SP], r15
+    ld.w  STK_OFFSET_R16[SP], r16
+    ld.w  STK_OFFSET_R17[SP], r17
+    ld.w  STK_OFFSET_R18[SP], r18
+    ld.w  STK_OFFSET_R19[SP], r19
+    ld.w  STK_OFFSET_R20[SP], r20
+    ld.w  STK_OFFSET_R21[SP], r21
+    ld.w  STK_OFFSET_R22[SP], r22
+    ld.w  STK_OFFSET_R23[SP], r23
+    ld.w  STK_OFFSET_R24[SP], r24
+    ld.w  STK_OFFSET_R25[SP], r25
+    ld.w  STK_OFFSET_R26[SP], r26
+    ld.w  STK_OFFSET_R27[SP], r27
+    ld.w  STK_OFFSET_R28[SP], r28
+    ld.w  STK_OFFSET_R29[SP], r29
+    ld.w  STK_OFFSET_R30[SP], r30
+    ld.w  STK_OFFSET_R31[SP], r31
 
-	ld.w  STK_OFFSET_EIPSW[SP], r2                              -- Restore task's EIPSW
-	ldsr  r2, EIPSW
+    ld.w  STK_OFFSET_EIPSW[SP], r2                              -- Restore task's EIPSW
+    ldsr  r2, EIPSW
 
-	ld.w  STK_OFFSET_EIPC[SP], r2                               -- Restore task's EIPC
-	ldsr  r2, EIPC
+    ld.w  STK_OFFSET_EIPC[SP], r2                               -- Restore task's EIPC
+    ldsr  r2, EIPC
 
-	ld.w  STK_OFFSET_CTPC[SP], r2                               -- Restore task's CTPC
-	ldsr  r2, CTPC
+    ld.w  STK_OFFSET_CTPC[SP], r2                               -- Restore task's CTPC
+    ldsr  r2, CTPC
 
-	ld.w  STK_OFFSET_CTPSW[SP], r2                              -- Restore task's CTPSW
-	ldsr  r2, CTPSW
+    ld.w  STK_OFFSET_CTPSW[SP], r2                              -- Restore task's CTPSW
+    ldsr  r2, CTPSW
 
-	ld.w  STK_OFFSET_R2[SP] , r2
+    ld.w  STK_OFFSET_R2[SP] , r2
 
-	addi STK_CTX_SIZE, SP, SP                                   -- Adjust the Stack Pointer
+    addi STK_CTX_SIZE, SP, SP                                   -- Adjust the Stack Pointer
 .endm
 
-	                                                            -- SAVE PROCESSOR REGISTER
-.macro	PUSHALL   SP
-   	addi  -STK_CTX_SIZE, SP, SP                                 -- Adjust the Stack Pointer
+                                                                -- SAVE PROCESSOR REGISTER
+.macro    PUSHALL   SP
+       addi  -STK_CTX_SIZE, SP, SP                                 -- Adjust the Stack Pointer
 
-	st.w   r1, STK_OFFSET_R1[SP]
-	st.w   r2, STK_OFFSET_R2[SP]
-	st.w   r6, STK_OFFSET_R6[SP]
-	st.w   r7, STK_OFFSET_R7[SP]
-	st.w   r8, STK_OFFSET_R8[SP]
-	st.w   r9, STK_OFFSET_R9[SP]
-	st.w  r10, STK_OFFSET_R10[SP]
-	st.w  r11, STK_OFFSET_R11[SP]
-	st.w  r12, STK_OFFSET_R12[SP]
-	st.w  r13, STK_OFFSET_R13[SP]
-	st.w  r14, STK_OFFSET_R14[SP]
-	st.w  r15, STK_OFFSET_R15[SP]
-	st.w  r16, STK_OFFSET_R16[SP]
-	st.w  r17, STK_OFFSET_R17[SP]
-	st.w  r18, STK_OFFSET_R18[SP]
-	st.w  r19, STK_OFFSET_R19[SP]
-	st.w  r20, STK_OFFSET_R20[SP]
-	st.w  r21, STK_OFFSET_R21[SP]
-	st.w  r22, STK_OFFSET_R22[SP]
-	st.w  r23, STK_OFFSET_R23[SP]
-	st.w  r24, STK_OFFSET_R24[SP]
-	st.w  r25, STK_OFFSET_R25[SP]
-	st.w  r26, STK_OFFSET_R26[SP]
-	st.w  r27, STK_OFFSET_R27[SP]
-	st.w  r28, STK_OFFSET_R28[SP]
-	st.w  r29, STK_OFFSET_R29[SP]
-	st.w  r30, STK_OFFSET_R30[SP]
-	st.w  r31, STK_OFFSET_R31[SP]
+    st.w   r1, STK_OFFSET_R1[SP]
+    st.w   r2, STK_OFFSET_R2[SP]
+    st.w   r6, STK_OFFSET_R6[SP]
+    st.w   r7, STK_OFFSET_R7[SP]
+    st.w   r8, STK_OFFSET_R8[SP]
+    st.w   r9, STK_OFFSET_R9[SP]
+    st.w  r10, STK_OFFSET_R10[SP]
+    st.w  r11, STK_OFFSET_R11[SP]
+    st.w  r12, STK_OFFSET_R12[SP]
+    st.w  r13, STK_OFFSET_R13[SP]
+    st.w  r14, STK_OFFSET_R14[SP]
+    st.w  r15, STK_OFFSET_R15[SP]
+    st.w  r16, STK_OFFSET_R16[SP]
+    st.w  r17, STK_OFFSET_R17[SP]
+    st.w  r18, STK_OFFSET_R18[SP]
+    st.w  r19, STK_OFFSET_R19[SP]
+    st.w  r20, STK_OFFSET_R20[SP]
+    st.w  r21, STK_OFFSET_R21[SP]
+    st.w  r22, STK_OFFSET_R22[SP]
+    st.w  r23, STK_OFFSET_R23[SP]
+    st.w  r24, STK_OFFSET_R24[SP]
+    st.w  r25, STK_OFFSET_R25[SP]
+    st.w  r26, STK_OFFSET_R26[SP]
+    st.w  r27, STK_OFFSET_R27[SP]
+    st.w  r28, STK_OFFSET_R28[SP]
+    st.w  r29, STK_OFFSET_R29[SP]
+    st.w  r30, STK_OFFSET_R30[SP]
+    st.w  r31, STK_OFFSET_R31[SP]
 
-	stsr  EIPC, r2
-	st.w  r2, STK_OFFSET_EIPC[SP]                               -- Restore task's EIPC
+    stsr  EIPC, r2
+    st.w  r2, STK_OFFSET_EIPC[SP]                               -- Restore task's EIPC
 
-	stsr  EIPSW, r2
-	st.w  r2, STK_OFFSET_EIPSW[SP]                              -- Restore task's EIPSW
+    stsr  EIPSW, r2
+    st.w  r2, STK_OFFSET_EIPSW[SP]                              -- Restore task's EIPSW
 
-	stsr  CTPC, r2
-	st.w  r2, STK_OFFSET_CTPC[SP]                               -- Restore task's CTPC
+    stsr  CTPC, r2
+    st.w  r2, STK_OFFSET_CTPC[SP]                               -- Restore task's CTPC
 
-	stsr  CTPSW, r2
-	st.w  r2, STK_OFFSET_CTPSW[SP]                              -- Restore task's CTPSW
+    stsr  CTPSW, r2
+    st.w  r2, STK_OFFSET_CTPSW[SP]                              -- Restore task's CTPSW
 .endm
 
 #********************************************************************************************************
@@ -240,13 +240,13 @@ __trap00:
 #********************************************************************************************************
 
 _OS_CPU_SR_Save:
-	stsr  PSW, r10                                              -- Save PSW
-	di                                                          -- Disable interrupts
-	jmp   [lp]
+    stsr  PSW, r10                                              -- Save PSW
+    di                                                          -- Disable interrupts
+    jmp   [lp]
 
 _OS_CPU_SR_Restore:
-	ldsr  r6, PSW                                               -- Restore PSW
-	jmp   [lp]
+    ldsr  r6, PSW                                               -- Restore PSW
+    jmp   [lp]
 
 #********************************************************************************************************
 #                                           START MULTITASKING
@@ -260,18 +260,18 @@ _OS_CPU_SR_Restore:
 #********************************************************************************************************
 
 _OSStartHighRdy:
-	jarl  _OSTaskSwHook, lp                                     -- Call OSTaskSwHook();
+    jarl  _OSTaskSwHook, lp                                     -- Call OSTaskSwHook();
 
-	mov   0x01, r2                                              -- OSRunning = TRUE;
-	st.b  r2  , #_OSRunning[r0]
+    mov   0x01, r2                                              -- OSRunning = TRUE;
+    st.b  r2  , #_OSRunning[r0]
 
-  	mov   #_OSTCBHighRdy, r11                                   -- SWITCH TO HIGHEST PRIORITY TASK:
-	ld.w  0[r11]        , r11
-	ld.w  0[r11]        , sp
+      mov   #_OSTCBHighRdy, r11                                   -- SWITCH TO HIGHEST PRIORITY TASK:
+    ld.w  0[r11]        , r11
+    ld.w  0[r11]        , sp
 
-	POPALL sp                                                   -- Restore Task Context
+    POPALL sp                                                   -- Restore Task Context
 
-	reti
+    reti
 
 #********************************************************************************************************
 #                         PERFORM A CONTEXT SWITCH (From task level) - OSCtxSw()
@@ -292,29 +292,29 @@ _OSStartHighRdy:
 #********************************************************************************************************
 
 _OSCtxSw:
-	PUSHALL sp                                                  -- Save current Task context
+    PUSHALL sp                                                  -- Save current Task context
 
-	mov   #_OSTCBCur, r11                                       -- OSTCBCur->OSTCBStkPtr = SP;
-	ld.w  0[r11]	, r11
-	st.w  sp	    , 0[r11]
+    mov   #_OSTCBCur, r11                                       -- OSTCBCur->OSTCBStkPtr = SP;
+    ld.w  0[r11]    , r11
+    st.w  sp        , 0[r11]
 
-	jarl  _OSTaskSwHook, lp                                     -- OSTaskSwHook();
+    jarl  _OSTaskSwHook, lp                                     -- OSTaskSwHook();
 
-   	mov   #_OSPrioHighRdy, r11                                  -- OSPrioCur = OSPrioHighRdy;
-   	ld.b  0[r11]	     , r12
-	mov   #_OSPrioCur    , r11
-	st.b  r12            , 0[r11]
+       mov   #_OSPrioHighRdy, r11                                  -- OSPrioCur = OSPrioHighRdy;
+       ld.b  0[r11]         , r12
+    mov   #_OSPrioCur    , r11
+    st.b  r12            , 0[r11]
 
-	mov   #_OSTCBHighRdy, r11                                   -- OSTCBCur = OSTCBHighRdy;
-	ld.w  0[r11]	    , r12
-	mov   #_OSTCBCur    , r11
-	st.w  r12           , 0[r11]
+    mov   #_OSTCBHighRdy, r11                                   -- OSTCBCur = OSTCBHighRdy;
+    ld.w  0[r11]        , r12
+    mov   #_OSTCBCur    , r11
+    st.w  r12           , 0[r11]
 
-	ld.w  0[r12], sp                                            -- SP = OSTCBHighRdy->OSTCBStkPtr;
+    ld.w  0[r12], sp                                            -- SP = OSTCBHighRdy->OSTCBStkPtr;
 
-	POPALL sp                                                   -- Restore new Task's context
+    POPALL sp                                                   -- Restore new Task's context
 
-	reti                                                        -- return from trap
+    reti                                                        -- return from trap
 
 #********************************************************************************************************
 #                     PERFORM A CONTEXT SWITCH (From interrupt level) - OSIntCtxSw()
@@ -333,23 +333,23 @@ _OSCtxSw:
 #********************************************************************************************************
 
 _OSIntCtxSw:
-	jarl  _OSTaskSwHook, lp                                     -- OSTaskSwHook();
+    jarl  _OSTaskSwHook, lp                                     -- OSTaskSwHook();
 
-	mov   #_OSPrioHighRdy, r11                                  -- OSPrioCur = OSPrioHighRdy;
-	ld.b  0[r11]         , r12
-	mov   #_OSPrioCur    , r11
-	st.b  r12            , 0[r11]
+    mov   #_OSPrioHighRdy, r11                                  -- OSPrioCur = OSPrioHighRdy;
+    ld.b  0[r11]         , r12
+    mov   #_OSPrioCur    , r11
+    st.b  r12            , 0[r11]
 
-	mov   #_OSTCBHighRdy, r11                                   -- OSTCBCur = OSTCBHighRdy;
-	ld.w  0[r11]        , r12
-	mov   #_OSTCBCur    , r11
-	st.w  r12           , 0[r11]
+    mov   #_OSTCBHighRdy, r11                                   -- OSTCBCur = OSTCBHighRdy;
+    ld.w  0[r11]        , r12
+    mov   #_OSTCBCur    , r11
+    st.w  r12           , 0[r11]
 
-	ld.w  0[r12], sp                                            -- SP = OSTCBHighRdy->OSTCBStkPtr;
+    ld.w  0[r12], sp                                            -- SP = OSTCBHighRdy->OSTCBStkPtr;
 
-	POPALL sp
+    POPALL sp
 
-	reti                                                        -- Return from interrupt starts new task
+    reti                                                        -- Return from interrupt starts new task
 
 #********************************************************************************************************
 #                                        INTERRUPT/EXCEPTION  HANDLER
@@ -370,25 +370,25 @@ _OSIntCtxSw:
 #********************************************************************************************************
 
 _OS_CPU_IntHandler:
-	PUSHALL sp                                                  -- Saves Processor registers
+    PUSHALL sp                                                  -- Saves Processor registers
 
-	ld.b #_OSIntNesting[r0], r2                                 -- increment OSIntNesting
-	add 0x1, r2
-	st.b r2, #_OSIntNesting[r0]
+    ld.b #_OSIntNesting[r0], r2                                 -- increment OSIntNesting
+    add 0x1, r2
+    st.b r2, #_OSIntNesting[r0]
 
-	cmp  0x1, r2
-	bne  _OS_CPU_IntHandler01                                   -- if (OSIntNesting == 1) {
+    cmp  0x1, r2
+    bne  _OS_CPU_IntHandler01                                   -- if (OSIntNesting == 1) {
 
-	mov   #_OSTCBCur, r11                                       --     OSTCBCur->OSTCBStkPtr = SP;
-	ld.w  0[r11]    , r11
-	st.w  sp        , 0[r11]                                    -- }
+    mov   #_OSTCBCur, r11                                       --     OSTCBCur->OSTCBStkPtr = SP;
+    ld.w  0[r11]    , r11
+    st.w  sp        , 0[r11]                                    -- }
 
 _OS_CPU_IntHandler01:
-	stsr ECR, r6                                                -- get interrupt/exception source code that occured.
-	jarl _OS_CPU_IntHandlerSrc, lp
+    stsr ECR, r6                                                -- get interrupt/exception source code that occured.
+    jarl _OS_CPU_IntHandlerSrc, lp
 
-	jarl _OSIntExit, lp
+    jarl _OSIntExit, lp
 
-	POPALL sp                                                   -- Restore processor register
+    POPALL sp                                                   -- Restore processor register
 
-	reti
+    reti

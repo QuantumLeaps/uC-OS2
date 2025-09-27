@@ -3,7 +3,7 @@
 *                                              uC/OS-II
 *                                        The Real-Time Kernel
 *
-*                    Copyright 1992-2020 Silicon Laboratories Inc. www.silabs.com
+*                    Copyright 1992-2021 Silicon Laboratories Inc. www.silabs.com
 *
 *                                 SPDX-License-Identifier: APACHE-2.0
 *
@@ -21,7 +21,7 @@
 *                                          IAR IMPLEMENTATION
 *
 * Filename : os_tls.c
-* Version  : V2.93.00
+* Version  : V2.93.01
 *********************************************************************************************************
 */
 
@@ -47,7 +47,7 @@ const  char  *os_tls__c = "$Id: $";
 
 
 #if     (_DLIB_FILE_DESCRIPTOR > 0) && (_FILE_OP_LOCKS > 0)
-#define  OS_TLS_LOCK_MAX              ((_MAX_LOCK) + (FOPEN_MAX))	      /* _MAX_LOCK and _FOPEN_MAX defined by IAR  */
+#define  OS_TLS_LOCK_MAX              ((_MAX_LOCK) + (FOPEN_MAX))          /* _MAX_LOCK and _FOPEN_MAX defined by IAR  */
 #else
 #define  OS_TLS_LOCK_MAX               (_MAX_LOCK)
 #endif
@@ -129,8 +129,8 @@ OS_TLS_ID  OS_TLS_GetID (INT8U  *perr)
         return ((OS_TLS_ID)OS_TLS_TBL_SIZE);
     }
 
-    id   = OS_TLS_NextAvailID;	  								  /* Assign the next available ID                     */
-    OS_TLS_NextAvailID++;										  /* Increment available ID for next request          */
+    id   = OS_TLS_NextAvailID;                                        /* Assign the next available ID                     */
+    OS_TLS_NextAvailID++;                                          /* Increment available ID for next request          */
     OS_EXIT_CRITICAL();
    *perr = OS_ERR_NONE;
     return (id);
@@ -406,7 +406,7 @@ void  OS_TLS_TaskCreate (OS_TCB  *ptcb)
 
 
     if ((ptcb->OSTCBOpt & OS_TASK_OPT_NO_TLS) == OS_TASK_OPT_NONE) { /* See if TLS is available for this task         */
-	                                                                 /* Get TLS segment from the HEAP.                */
+                                                                     /* Get TLS segment from the HEAP.                */
         p_tls                           = (OS_TLS)__iar_dlib_perthread_allocate();
         __iar_dlib_perthread_initialize(p_tls);                      /* Initialize the TLS segment.                   */
         ptcb->OSTCBTLSTbl[OS_TLS_LibID] = p_tls;                     /* Set the TLS segment pointer in the task.      */

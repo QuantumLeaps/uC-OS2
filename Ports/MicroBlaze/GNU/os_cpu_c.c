@@ -3,7 +3,7 @@
 *                                              uC/OS-II
 *                                        The Real-Time Kernel
 *
-*                    Copyright 1992-2020 Silicon Laboratories Inc. www.silabs.com
+*                    Copyright 1992-2021 Silicon Laboratories Inc. www.silabs.com
 *
 *                                 SPDX-License-Identifier: APACHE-2.0
 *
@@ -22,7 +22,7 @@
 *                                          GNU  C/C++ Compiler
 *
 * Filename : os_cpu_c.c
-* Version  : V2.93.00
+* Version  : V2.93.01
 *********************************************************************************************************
 */
 
@@ -230,12 +230,12 @@ void  OSTaskStatHook (void)
 OS_STK  *OSTaskStkInit (void (*task)(void *pd), void *p_arg, OS_STK *ptos, INT16U opt)
 {
     INT32U  *pstk;
-	 INT32U  msr_val;
+     INT32U  msr_val;
 
 
     __asm__ __volatile__ ("mfs\t%0,rmsr\n" : "=r"(msr_val));
 
-    msr_val &= 0x000000A0;	           /* Ensure that the status of the caches is not changed           */
+    msr_val &= 0x000000A0;               /* Ensure that the status of the caches is not changed           */
 
     opt     = opt;                    /* 'opt' is not used, prevent warning                            */
     pstk    = (INT32U *)ptos;         /* Load stack pointer                                            */

@@ -3,7 +3,7 @@
 *                                              uC/OS-II
 *                                        The Real-Time Kernel
 *
-*                    Copyright 1992-2020 Silicon Laboratories Inc. www.silabs.com
+*                    Copyright 1992-2021 Silicon Laboratories Inc. www.silabs.com
 *
 *                                 SPDX-License-Identifier: APACHE-2.0
 *
@@ -21,7 +21,7 @@
 *                                           Renesas RL78 Port
 *
 * Filename : os_cpu_c.c
-* Version  : V2.93.00
+* Version  : V2.93.01
 *********************************************************************************************************
 * For       : Renesas RL78
 * Toolchain : E2Studios v2.x GNURL78 Compiler v1.x
@@ -63,7 +63,7 @@ static INT16U OSTmrCtr;
 #if OS_CPU_HOOKS_EN > 0 && OS_VERSION > 203
 void OSInitHookBegin(void) {
 #if (OS_VERSION >= 281) && (OS_TMR_EN > 0)
-	OSTmrCtr = 0;
+    OSTmrCtr = 0;
 #endif
 }
 #endif
@@ -101,9 +101,9 @@ void OSInitHookEnd(void) {
 #if OS_CPU_HOOKS_EN > 0
 void OSTaskCreateHook(OS_TCB *ptcb) {
 #if OS_APP_HOOKS_EN > 0
-	App_TaskCreateHook(ptcb);
+    App_TaskCreateHook(ptcb);
 #else
-	(void)ptcb; 												/* Prevent compiler warning                             */
+    (void)ptcb;                                                 /* Prevent compiler warning                             */
 #endif
 }
 #endif
@@ -122,9 +122,9 @@ void OSTaskCreateHook(OS_TCB *ptcb) {
 #if OS_CPU_HOOKS_EN > 0
 void OSTaskDelHook(OS_TCB *ptcb) {
 #if OS_APP_HOOKS_EN > 0
-	App_TaskDelHook(ptcb);
+    App_TaskDelHook(ptcb);
 #else
-	(void)ptcb; 												/* Prevent compiler warning                             */
+    (void)ptcb;                                                 /* Prevent compiler warning                             */
 #endif
 }
 #endif
@@ -145,7 +145,7 @@ void OSTaskDelHook(OS_TCB *ptcb) {
 #if OS_CPU_HOOKS_EN > 0 && OS_VERSION >= 251
 void OSTaskIdleHook(void) {
 #if OS_APP_HOOKS_EN > 0
-	App_TaskIdleHook();
+    App_TaskIdleHook();
 #endif
 }
 #endif
@@ -166,9 +166,9 @@ void OSTaskIdleHook(void) {
 #if OS_CPU_HOOKS_EN > 0u
 void OSTaskReturnHook(OS_TCB *ptcb) {
 #if OS_APP_HOOKS_EN > 0u
-	App_TaskReturnHook(ptcb);
+    App_TaskReturnHook(ptcb);
 #else
-	(void)ptcb;
+    (void)ptcb;
 #endif
 }
 #endif
@@ -187,7 +187,7 @@ void OSTaskReturnHook(OS_TCB *ptcb) {
 #if OS_CPU_HOOKS_EN > 0
 void OSTaskStatHook(void) {
 #if OS_APP_HOOKS_EN > 0
-	App_TaskStatHook();
+    App_TaskStatHook();
 #endif
 }
 #endif
@@ -220,24 +220,24 @@ void OSTaskStatHook(void) {
  */
 
 OS_STK *OSTaskStkInit(void (*task)(void *pd), void *pdata, OS_STK *ptos,
-		INT16U opt) {
-	OS_STK *p_stk;
+        INT16U opt) {
+    OS_STK *p_stk;
 
-	(void) opt;
+    (void) opt;
 
-	p_stk = (INT16U *) ptos; 									/* Load stack pointer                                   */
+    p_stk = (INT16U *) ptos;                                     /* Load stack pointer                                   */
 
-	*(--p_stk) = (INT16U) ((INT32U) pdata >> 16);
-	*(--p_stk) = (INT16U) pdata;
-	*(--p_stk) = (INT16U) 0x8600; 								/* PC bits 16-19 in lower 8 bits, psw in upper 16 bits  */
-	*(--p_stk) = (INT16U) task; 								/* PC bits 0-15                                         */
-	*(--p_stk) = 0x1100; 										/* RP0   =   R1 + R0                                    */
-	*(--p_stk) = 0x3322; 										/* RP1   =   R3 + R2                                    */
-	*(--p_stk) = 0x5544; 										/* RP2   =   R5 + R4                                    */
-	*(--p_stk) = 0x7766; 										/* RP3   =   R7 + R6                                    */
-	*(--p_stk) = 0x0F00; 										/* ES:CS =   ES + CS register                           */
+    *(--p_stk) = (INT16U) ((INT32U) pdata >> 16);
+    *(--p_stk) = (INT16U) pdata;
+    *(--p_stk) = (INT16U) 0x8600;                                 /* PC bits 16-19 in lower 8 bits, psw in upper 16 bits  */
+    *(--p_stk) = (INT16U) task;                                 /* PC bits 0-15                                         */
+    *(--p_stk) = 0x1100;                                         /* RP0   =   R1 + R0                                    */
+    *(--p_stk) = 0x3322;                                         /* RP1   =   R3 + R2                                    */
+    *(--p_stk) = 0x5544;                                         /* RP2   =   R5 + R4                                    */
+    *(--p_stk) = 0x7766;                                         /* RP3   =   R7 + R6                                    */
+    *(--p_stk) = 0x0F00;                                         /* ES:CS =   ES + CS register                           */
 
-	return (p_stk);
+    return (p_stk);
 }
 
 /*
@@ -259,7 +259,7 @@ OS_STK *OSTaskStkInit(void (*task)(void *pd), void *pdata, OS_STK *ptos,
 #if (OS_CPU_HOOKS_EN > 0) && (OS_TASK_SW_HOOK_EN > 0)
 void OSTaskSwHook(void) {
 #if OS_APP_HOOKS_EN > 0
-	App_TaskSwHook();
+    App_TaskSwHook();
 #endif
 }
 #endif
@@ -278,9 +278,9 @@ void OSTaskSwHook(void) {
 #if OS_CPU_HOOKS_EN > 0 && OS_VERSION > 203
 void OSTCBInitHook(OS_TCB *ptcb) {
 #if OS_APP_HOOKS_EN > 0
-	App_TCBInitHook(ptcb);
+    App_TCBInitHook(ptcb);
 #else
-	(void)ptcb; 												/* Prevent compiler warning                             */
+    (void)ptcb;                                                 /* Prevent compiler warning                             */
 #endif
 }
 #endif
@@ -300,15 +300,15 @@ void OSTCBInitHook(OS_TCB *ptcb) {
 #if (OS_CPU_HOOKS_EN > 0) && (OS_TIME_TICK_HOOK_EN > 0)
 void OSTimeTickHook(void) {
 #if OS_APP_HOOKS_EN > 0
-	App_TimeTickHook();
+    App_TimeTickHook();
 #endif
 
 #if (OS_VERSION >= 281) && (OS_TMR_EN > 0)
-	OSTmrCtr++;
-	if (OSTmrCtr >= (OS_TICKS_PER_SEC / OS_TMR_CFG_TICKS_PER_SEC)) {
-		OSTmrCtr = 0;
-		OSTmrSignal();
-	}
+    OSTmrCtr++;
+    if (OSTmrCtr >= (OS_TICKS_PER_SEC / OS_TMR_CFG_TICKS_PER_SEC)) {
+        OSTmrCtr = 0;
+        OSTmrSignal();
+    }
 #endif
 
 }

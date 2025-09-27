@@ -3,7 +3,7 @@
 *                                              uC/OS-II
 *                                        The Real-Time Kernel
 *
-*                    Copyright 1992-2020 Silicon Laboratories Inc. www.silabs.com
+*                    Copyright 1992-2021 Silicon Laboratories Inc. www.silabs.com
 *
 *                                 SPDX-License-Identifier: APACHE-2.0
 *
@@ -26,7 +26,7 @@
 *                                             ARMv6-M Port
 *
 * Filename  : os_cpu_c.c
-* Version   : V2.93.00
+* Version   : V2.93.01
 *********************************************************************************************************
 * For       : ARMv6-M Cortex-M0 or Cortex-M0+
 * Mode      : Thumb2
@@ -543,7 +543,7 @@ void  OS_CPU_SysTickInit (INT32U  cnts)
 
                                                                 /* Enable timer.                                        */
     OS_CPU_CM0_NVIC_ST_CTRL  |= OS_CPU_CM0_NVIC_ST_CTRL_CLK_SRC |
-	                            OS_CPU_CM0_NVIC_ST_CTRL_ENABLE;
+                                OS_CPU_CM0_NVIC_ST_CTRL_ENABLE;
                                                                 /* Enable timer interrupt.                              */
     OS_CPU_CM0_NVIC_ST_CTRL  |= OS_CPU_CM0_NVIC_ST_CTRL_INTEN;
 }

@@ -3,7 +3,7 @@
 *                                              uC/OS-II
 *                                        The Real-Time Kernel
 *
-*                    Copyright 1992-2020 Silicon Laboratories Inc. www.silabs.com
+*                    Copyright 1992-2021 Silicon Laboratories Inc. www.silabs.com
 *
 *                                 SPDX-License-Identifier: APACHE-2.0
 *
@@ -21,7 +21,7 @@
 *                                           Renesas M32C Port
 *
 * Filename  : os_cpu_c.c
-* Version   : V2.93.00
+* Version   : V2.93.01
 *********************************************************************************************************
 * For       : Renesas M32C
 * Toolchain : IAR's EW for M32C
@@ -203,8 +203,8 @@ void  OSTaskStatHook (void)
 *                           A0    (H)
 *                           A1    (L)
 *                           A1    (H)
-*                           FB	  (L)
-*                           FB	  (H)
+*                           FB      (L)
+*                           FB      (H)
 *                           task  (L)
 *                           task  (H)
 *                 ptos ->   FLG
@@ -217,30 +217,30 @@ OS_STK  *OSTaskStkInit (void (*task)(void *pd), void *pdata, OS_STK *ptos, INT16
 
 
     pstk16     = (INT16U *)ptos;                  /* Load top of stack for this task                           */
-												  /* Simulate call to 'task()' with argument                   */
+                                                  /* Simulate call to 'task()' with argument                   */
     *pstk16--  = (INT32U)pdata >> 16L;            /* ... Push of argument 'pdata'                              */
     *pstk16--  = (INT32U)pdata & 0x0000FFFFL;
     *pstk16--  = (INT32U)task  >> 16L;            /* ... Push of the task start address                        */
     *pstk16--  = (INT32U)task  & 0x0000FFFFL;
 
-												  /* Simulate ISR entry and push all registers onto ISP        */
+                                                  /* Simulate ISR entry and push all registers onto ISP        */
     *pstk16--  = (INT16U)0x0040;                  /* ... FLG register: IPL=0, ISP selected, Interrupts enabled */
     *pstk16--  = (INT32U)task  >> 16L;            /* ... Push of the task start address                        */
     *pstk16--  = (INT32U)task  & 0x0000FFFFL;
 
-												  /* Save registers onto stack frame                           */
-    *pstk16--  = (INT16U)0xFBFB;				  /* ... FB register                                           */
+                                                  /* Save registers onto stack frame                           */
+    *pstk16--  = (INT16U)0xFBFB;                  /* ... FB register                                           */
     *pstk16--  = (INT16U)0xFBFB;
-    *pstk16--  = (INT16U)0x3B3B;				  /* ... SB register                                           */
+    *pstk16--  = (INT16U)0x3B3B;                  /* ... SB register                                           */
     *pstk16--  = (INT16U)0x3B3B;
-    *pstk16--  = (INT16U)0xA1A1;				  /* ... A1 register                                           */
+    *pstk16--  = (INT16U)0xA1A1;                  /* ... A1 register                                           */
     *pstk16--  = (INT16U)0xA1A1;
-    *pstk16--  = (INT16U)0xA0A0;				  /* ... A0 register                                           */
+    *pstk16--  = (INT16U)0xA0A0;                  /* ... A0 register                                           */
     *pstk16--  = (INT16U)0xA0A0;
-    *pstk16--  = (INT16U)0x3333;				  /* ... R3 register                                           */
-    *pstk16--  = (INT16U)0x2222;				  /* ... R2 register                                           */
-    *pstk16--  = (INT16U)0x1111;				  /* ... R1 register                                           */
-    *pstk16    = (INT16U)0x0000;				  /* ... R0 register                                           */
+    *pstk16--  = (INT16U)0x3333;                  /* ... R3 register                                           */
+    *pstk16--  = (INT16U)0x2222;                  /* ... R2 register                                           */
+    *pstk16--  = (INT16U)0x1111;                  /* ... R1 register                                           */
+    *pstk16    = (INT16U)0x0000;                  /* ... R0 register                                           */
 
     return ((OS_STK *)pstk16);
 }

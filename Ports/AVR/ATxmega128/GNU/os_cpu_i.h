@@ -2,7 +2,7 @@
 ;                                              uC/OS-II
 ;                                        The Real-Time Kernel
 ;
-;                    Copyright 1992-2020 Silicon Laboratories Inc. www.silabs.com
+;                    Copyright 1992-2021 Silicon Laboratories Inc. www.silabs.com
 ;
 ;                                 SPDX-License-Identifier: APACHE-2.0
 ;
@@ -18,7 +18,7 @@
 ;                                           GNU AVR Compiler
 ;
 ; Filename : os_cpu_i.h
-; Version  : V2.93.00
+; Version  : V2.93.01
 ;********************************************************************************************************
 
 ;********************************************************************************************************
@@ -69,50 +69,50 @@ RAMPD   = 0x38
 ;*
 
                .macro  PUSH_ALL                            ; Save all registers
-	            PUSH    R0
-				IN      R0, SREG
-				PUSH    R0
-				PUSH    R1
-				CLR     R1
-				PUSH    R2
-				PUSH    R3
-				PUSH    R4
-				PUSH    R5
-				PUSH    R6
-				PUSH    R7
-				PUSH    R8
-				PUSH    R9
-				PUSH    R10
-				PUSH    R11
-				PUSH    R12
-				PUSH    R13
-				PUSH    R14
-				PUSH    R15
-				PUSH    R16
-				PUSH    R17
-				PUSH    R18
-				PUSH    R19
-				PUSH    R20
-				PUSH    R21
-				PUSH    R22
-				PUSH    R23
-				PUSH    R24
-				PUSH    R25
-				PUSH    R26
-				PUSH    R27
-				PUSH    R28
-				PUSH    R29
-				PUSH    R30
-				PUSH    R31
+                PUSH    R0
+                IN      R0, SREG
+                PUSH    R0
+                PUSH    R1
+                CLR     R1
+                PUSH    R2
+                PUSH    R3
+                PUSH    R4
+                PUSH    R5
+                PUSH    R6
+                PUSH    R7
+                PUSH    R8
+                PUSH    R9
+                PUSH    R10
+                PUSH    R11
+                PUSH    R12
+                PUSH    R13
+                PUSH    R14
+                PUSH    R15
+                PUSH    R16
+                PUSH    R17
+                PUSH    R18
+                PUSH    R19
+                PUSH    R20
+                PUSH    R21
+                PUSH    R22
+                PUSH    R23
+                PUSH    R24
+                PUSH    R25
+                PUSH    R26
+                PUSH    R27
+                PUSH    R28
+                PUSH    R29
+                PUSH    R30
+                PUSH    R31
                 IN      R16, EIND
                 PUSH    R16
-				IN      R16, RAMPD
+                IN      R16, RAMPD
                 PUSH    R16
-				IN      R16, RAMPX
+                IN      R16, RAMPX
                 PUSH    R16
-				IN      R16, RAMPY
+                IN      R16, RAMPY
                 PUSH    R16
-				IN      R16, RAMPZ
+                IN      R16, RAMPZ
                 PUSH    R16
                 .endm
 ;*
@@ -134,7 +134,7 @@ RAMPD   = 0x38
                 .macro  POP_ALL                             ; Restore all registers
                 POP     R16
                 OUT     RAMPZ, R16
-				POP     R16
+                POP     R16
                 OUT     RAMPY, R16
                 POP     R16
                 OUT     RAMPX, R16
@@ -142,40 +142,40 @@ RAMPD   = 0x38
                 OUT     RAMPD, R16
                 POP     R16
                 OUT     EIND,  R16
-				POP     R31
-				POP     R30
-				POP     R29
-				POP     R28
-				POP     R27
-				POP     R26
-				POP     R25
-				POP     R24
-				POP     R23
-				POP     R22
-				POP     R21
-				POP     R20
-				POP     R19
-				POP     R18
-				POP     R17
-				POP     R16
-				POP     R15
-				POP     R14
-				POP     R13
-				POP     R12
-				POP     R11
-				POP     R10
-				POP     R9
-				POP     R8
-				POP     R7
-				POP     R6
-				POP     R5
-				POP     R4
-				POP     R3
-				POP     R2
-				POP     R1
-				POP     R0
-				OUT     SREG, R0
-				POP     R0
+                POP     R31
+                POP     R30
+                POP     R29
+                POP     R28
+                POP     R27
+                POP     R26
+                POP     R25
+                POP     R24
+                POP     R23
+                POP     R22
+                POP     R21
+                POP     R20
+                POP     R19
+                POP     R18
+                POP     R17
+                POP     R16
+                POP     R15
+                POP     R14
+                POP     R13
+                POP     R12
+                POP     R11
+                POP     R10
+                POP     R9
+                POP     R8
+                POP     R7
+                POP     R6
+                POP     R5
+                POP     R4
+                POP     R3
+                POP     R2
+                POP     R1
+                POP     R0
+                OUT     SREG, R0
+                POP     R0
                 .endm
 ;*
 ;*********************************************************************************************************
@@ -191,8 +191,8 @@ RAMPD   = 0x38
 
                 .macro  SAVE_SP                            ; Save stack pointer
                 IN      R26,  SPL
-				IN      R27,  SPH
-			  .endm
+                IN      R27,  SPH
+              .endm
 
 ;*
 ;*********************************************************************************************************
@@ -209,4 +209,4 @@ RAMPD   = 0x38
                  OUT     SPL,R28
                  LD      R29,X+
                  OUT     SPH,R29
-				.endm
+                .endm

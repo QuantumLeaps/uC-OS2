@@ -2,7 +2,7 @@
 ;                                              uC/OS-II
 ;                                        The Real-Time Kernel
 ;
-;                    Copyright 1992-2020 Silicon Laboratories Inc. www.silabs.com
+;                    Copyright 1992-2021 Silicon Laboratories Inc. www.silabs.com
 ;
 ;                                 SPDX-License-Identifier: APACHE-2.0
 ;
@@ -18,7 +18,7 @@
 ;                                           Renesas RL78 Port
 ;
 ; Filename : os_cpu_a.asm
-; Version  : V2.93.00
+; Version  : V2.93.01
 ;********************************************************************************************************
 ; For       : Renesas RL78
 ; Toolchain : E2Studios v2.x GNURL78 Compiler v1.x
@@ -137,24 +137,24 @@ _OSCtxSw:
 
                                                                 ; Save OSTCBCur->StkPtr as current SP value
         MOVW    DE, #_OSTCBCur                                  ; Get OSTCBCur
-        MOVW    AX, [DE + 0x0000]								; Store OSTCBCur address in AX
-        MOVW	DE, AX
-        MOVW    AX, SP											; AX->OSTCBCur (AX pointed to OSTCBCur)
+        MOVW    AX, [DE + 0x0000]                                ; Store OSTCBCur address in AX
+        MOVW    DE, AX
+        MOVW    AX, SP                                            ; AX->OSTCBCur (AX pointed to OSTCBCur)
         MOVW   [DE + 0x0000], AX                                ; OSTCBCur->OSTCBStkPtr = SP
 
         MOVW    BC, #_OSTaskSwHook
         CALL    BC                                              ; call OSTaskSwHook()
 
-																; Set OSTCBCur = OSTCBHighRdy
+                                                                ; Set OSTCBCur = OSTCBHighRdy
         MOVW    HL, #_OSTCBHighRdy                              ; HL = OSTCBHighRdy
         MOVW    AX, [HL + 0x0000]                               ; AX = OSTCBHighRdy[0] (i.e. OSTCBStkPtr)
         MOVW    HL, #_OSTCBCur                                  ; HL = OSTCBCur
         MOVW   [HL + 0x0000], AX                                ; OSTCBCur = OSTCBHighRdy[0] (sets equal to one another)
 
-																; Set OSPrioCur to the next ready priority
+                                                                ; Set OSPrioCur to the next ready priority
         MOVW    DE, #_OSPrioCur                                 ; DE = OSPrioCur
         MOVW    HL, #_OSPrioHighRdy                             ; HL = OSPrioHighRdy
-        MOV     A, [HL + 0x0000]							    ; AX->OSPrioHighRdy
+        MOV     A, [HL + 0x0000]                                ; AX->OSPrioHighRdy
         MOV    [DE + 0x0000], A                                 ; OSPrioCur = OSPrioHighRdy
 
         MOVW    HL, #_OSTCBHighRdy                              ; HL = OSTCBHighRdy

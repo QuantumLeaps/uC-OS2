@@ -3,7 +3,7 @@
 *                                              uC/OS-II
 *                                        The Real-Time Kernel
 *
-*                    Copyright 1992-2020 Silicon Laboratories Inc. www.silabs.com
+*                    Copyright 1992-2021 Silicon Laboratories Inc. www.silabs.com
 *
 *                                 SPDX-License-Identifier: APACHE-2.0
 *
@@ -22,21 +22,21 @@
 *                                          GNU  C/C++ Compiler
 *
 * Filename : os_cpu_a.S
-* Version  : V2.93.00
+* Version  : V2.93.01
 *********************************************************************************************************
 */
 
 #include "xreg405.h"
 
-	.file "os_cpu_a.S"
+    .file "os_cpu_a.S"
 
-	.section ".vectors","ax"
+    .section ".vectors","ax"
 
 #ifdef __DCC__
 #define // ;
-#define MACRO0(name)name:	.macro
-#define MACRO1(name, param1)name:	.macro	param1
-#define MACRO2(name, param1, param2)name:	.macro	param1, param2
+#define MACRO0(name)name:    .macro
+#define MACRO1(name, param1)name:    .macro    param1
+#define MACRO2(name, param1, param2)name:    .macro    param1, param2
 #define CONCAT(left, right) left##&&##right
 #define CONCAT3(left, parammiddle, right) left##&&##parammiddle##right
 #define PARAM(param) param
@@ -44,9 +44,9 @@
 #include <ppc-asm.h>
 #define r1 1
 #define r2 2
-#define MACRO0(name) .macro	name
-#define MACRO1(name, param1) .macro	name	param1
-#define MACRO2(name, param1, param2) .macro	name	param1 param2
+#define MACRO0(name) .macro    name
+#define MACRO1(name, param1) .macro    name    param1
+#define MACRO2(name, param1, param2) .macro    name    param1 param2
 #define CONCAT(left,right) left##right
 #define PARAM(param) param
 #endif
@@ -999,6 +999,3 @@ OS_CPU_SR_Restore:
 
     mtmsr  XREG_GPR3                                    /* Restore the saved MSR                       */
     blr
-
-
-

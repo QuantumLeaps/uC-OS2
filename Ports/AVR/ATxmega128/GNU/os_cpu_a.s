@@ -2,7 +2,7 @@
 ;                                              uC/OS-II
 ;                                        The Real-Time Kernel
 ;
-;                    Copyright 1992-2020 Silicon Laboratories Inc. www.silabs.com
+;                    Copyright 1992-2021 Silicon Laboratories Inc. www.silabs.com
 ;
 ;                                 SPDX-License-Identifier: APACHE-2.0
 ;
@@ -18,7 +18,7 @@
 ;                                           GNU AVR Compiler
 ;
 ; Filename : os_cpu_a.s
-; Version  : V2.93.00
+; Version  : V2.93.01
 ;********************************************************************************************************
 
 #include  <os_cpu_i.h>
@@ -27,25 +27,25 @@
 ;                                         PUBLIC DECLARATIONS
 ;********************************************************************************************************
 
-		.global OS_CPU_SR_Save
-		.global OS_CPU_SR_Restore
-		.global OSStartHighRdy
-		.global OSCtxSw
-		.global OSIntCtxSw
+        .global OS_CPU_SR_Save
+        .global OS_CPU_SR_Restore
+        .global OSStartHighRdy
+        .global OSCtxSw
+        .global OSIntCtxSw
 
 
 ;********************************************************************************************************
 ;                                         EXTERNAL DECLARATIONS
 ;********************************************************************************************************
 
-		.extern OSTaskSwHook
-		.extern OSRunning
-		.extern OSTCBHighRdy
-		.extern OSTCBCur
-		.extern OSPrioHighRdy
+        .extern OSTaskSwHook
+        .extern OSRunning
+        .extern OSTCBHighRdy
+        .extern OSTCBCur
+        .extern OSPrioHighRdy
 
 
-		.text
+        .text
 
 
 ;********************************************************************************************************
@@ -169,10 +169,10 @@ OSStartHighRdy:
 OSCtxSw:
         PUSH_ALL                                                ; Save current task's context
 
-		IN      R26,  SPL                                       ; X = SP
-		IN      R27,  SPH                                       ;
+        IN      R26,  SPL                                       ; X = SP
+        IN      R27,  SPH                                       ;
 
-		LDS     R28,OSTCBCur                                    ; Y = OSTCBCur->OSTCBStkPtr
+        LDS     R28,OSTCBCur                                    ; Y = OSTCBCur->OSTCBStkPtr
         LDS     R29,OSTCBCur+1                                  ;
         ST      Y+,R26                                          ; Y = SP
         ST      Y+,R27                                          ;
@@ -187,9 +187,9 @@ OSCtxSw:
         STS     OSTCBCur,R26                                    ; OSTCBCur = OSTCBHighRdy
         STS     OSTCBCur+1,R27
 
-	    RESTORE_SP                                              ; SP = MEM[X];
-		POP_ALL
-		RET
+        RESTORE_SP                                              ; SP = MEM[X];
+        POP_ALL
+        RET
 
 
 
@@ -246,6 +246,5 @@ OSIntCtxSw:
         STS     OSTCBCur+1,R27                                  ;
 
         RESTORE_SP                                              ; SP = MEM[X];
-		POP_ALL                                                 ; Restore all registers
+        POP_ALL                                                 ; Restore all registers
         RETI
-

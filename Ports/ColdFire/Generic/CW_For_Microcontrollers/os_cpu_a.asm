@@ -3,7 +3,7 @@
 ;                                              uC/OS-II
 ;                                        The Real-Time Kernel
 ;
-;                    Copyright 1992-2020 Silicon Laboratories Inc. www.silabs.com
+;                    Copyright 1992-2021 Silicon Laboratories Inc. www.silabs.com
 ;
 ;                                 SPDX-License-Identifier: APACHE-2.0
 ;
@@ -17,7 +17,7 @@
 /*
 ;********************************************************************************************************
 ; Filename : os_cpu_a.asm
-; Version  : V2.93.00
+; Version  : V2.93.01
 ;********************************************************************************************************
 ; Note(s)  : 1) This port uses the MOVEM.L (A7),D0-D7/A0-A6, LEA 60(A7)A7 construct instead of
 ;               the traditional 68xxx MOVEM.L (A7)+,D0-D7/A0-A6.  It is perfectly in order to
@@ -43,7 +43,7 @@
         .global  _OSIntCtxSw
         .global  _OSStartHighRdy
 
-		.global  _OS_My_ISR
+        .global  _OS_My_ISR
 
 /*
 ;**************************************************************************************************
@@ -163,7 +163,7 @@ _OSStartHighRdy:
        MOVE.L    (_OSTCBHighRdy),A1       /* Point to TCB of highest prio task ready to run*/
        MOVE.L    (A1),A7                  /* Get the stack pointer of the task to resume   */
 
-       MOVEM.L   (A7),D0-D7/A0-A6     	  /* Store all the regs                            */
+       MOVEM.L   (A7),D0-D7/A0-A6           /* Store all the regs                            */
        LEA       60(A7),A7                /* Advance the stack pointer                     */
 
        RTE                                /* Return to task                                */
@@ -212,7 +212,7 @@ _OSStartHighRdy:
 
 _OSCtxSw:
        LEA       -60(A7),A7
-       MOVEM.L   D0-D7/A0-A6,(A7)     	  /* Save the registers of the current task        */
+       MOVEM.L   D0-D7/A0-A6,(A7)           /* Save the registers of the current task        */
 
        MOVE.L    (_OSTCBCur),A1           /* Save stack pointer in the suspended task TCB  */
        MOVE.L    A7,(A1)
@@ -226,7 +226,7 @@ _OSCtxSw:
        MOVE.B    (_OSPrioHighRdy),D0      /* OSPrioCur = OSPrioHighRdy                     */
        MOVE.B    D0,(_OSPrioCur)
 
-       MOVEM.L   (A7),D0-D7/A0-A6     	  /* Restore the CPU registers                     */
+       MOVEM.L   (A7),D0-D7/A0-A6           /* Restore the CPU registers                     */
        LEA       60(A7),A7
 
        RTE                                /* Run task                                      */
@@ -237,7 +237,7 @@ _OSCtxSw:
 ;
 ;
 ; Description : This function is provided for backward compatibility and to
-;  				satisfy OSIntExit()
+;                  satisfy OSIntExit()
 ;               in OS_CORE.C.
 ;
 ; Arguments   : none
@@ -254,7 +254,7 @@ _OSIntCtxSw:
       MOVE.L     A1,(_OSTCBCur)
       MOVE.L     (A1),A7                  /* SP        = OSTCBHighRdy->OSTCBStkPtr         */
 
-      MOVEM.L    (A7),D0-D7/A0-A6     	  /* Restore ALL CPU registers from new task stack */
+      MOVEM.L    (A7),D0-D7/A0-A6           /* Restore ALL CPU registers from new task stack */
       LEA        60(A7),A7
 
       RTE                                 /* Run task                                      */

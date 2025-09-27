@@ -2,7 +2,7 @@
 ;                                              uC/OS-II
 ;                                        The Real-Time Kernel
 ;
-;                    Copyright 1992-2020 Silicon Laboratories Inc. www.silabs.com
+;                    Copyright 1992-2021 Silicon Laboratories Inc. www.silabs.com
 ;
 ;                                 SPDX-License-Identifier: APACHE-2.0
 ;
@@ -18,7 +18,7 @@
 ;                                             COSMIC C V4.1
 ;
 ; Filename : os_cpu_a.s
-; Version  : V2.93.00
+; Version  : V2.93.01
 ;********************************************************************************************************
 
 ;********************************************************************************************************
@@ -320,7 +320,7 @@ _OSIntExit68K:
     SUBQ.B    #1,_OSIntNesting              ; OSIntNesting--;
     BNE       OSIntExit68K_Exit
 
-    MOVE.B    _OSLockNesting,D0			    ; if (OSLockNesting == 0) {
+    MOVE.B    _OSLockNesting,D0                ; if (OSLockNesting == 0) {
     BNE       OSIntExit68K_Exit
 
     MOVE.W    (60,A7),D0                    ;     if (LAST nested ISR) {

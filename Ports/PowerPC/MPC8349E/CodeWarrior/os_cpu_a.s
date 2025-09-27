@@ -2,7 +2,7 @@
 #                                              uC/OS-II
 #                                        The Real-Time Kernel
 #
-#                    Copyright 1992-2020 Silicon Laboratories Inc. www.silabs.com
+#                    Copyright 1992-2021 Silicon Laboratories Inc. www.silabs.com
 #
 #                                 SPDX-License-Identifier: APACHE-2.0
 #
@@ -18,7 +18,7 @@
 #                                         CodeWarrior Compiler
 #
 # Filename : os_cpu_a.s
-# Version  : V2.93.00
+# Version  : V2.93.01
 #********************************************************************************************************
 
 #*********************************************************************************************************
@@ -57,7 +57,7 @@
     .global OSIntCtxSw
 
     .global OSExtIntISR
-	.global Exception_Epilogue
+    .global Exception_Epilogue
 
 #*********************************************************************************************************
 #*                                          Section
@@ -79,8 +79,8 @@
 #*               Except for Reset (0x100), External interrupt (0x500) and System Call (0xC00).
 #*********************************************************************************************************
 Exception_Epilogue:
-        mtspr        58,r24			       # restore CSRR1 (for critical interrupt)
-        mtspr        59,r25				   # restore CSRR0 (for critical interrupt)
+        mtspr        58,r24                   # restore CSRR1 (for critical interrupt)
+        mtspr        59,r25                   # restore CSRR0 (for critical interrupt)
         mtcr         r26                    # restore CR
         mtsrr0       r27                    # restore PC
         mtsrr1       r28                    # restore MSR

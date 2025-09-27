@@ -3,7 +3,7 @@
 *                                              uC/OS-II
 *                                        The Real-Time Kernel
 *
-*                    Copyright 1992-2020 Silicon Laboratories Inc. www.silabs.com
+*                    Copyright 1992-2021 Silicon Laboratories Inc. www.silabs.com
 *
 *                                 SPDX-License-Identifier: APACHE-2.0
 *
@@ -22,7 +22,7 @@
 *                                          GNU  C/C++ Compiler
 *
 * Filename : os_cpu_a.S
-* Version  : V2.93.00
+* Version  : V2.93.01
 *********************************************************************************************************
 */
 #define _ASMLANGUAGE
@@ -256,7 +256,7 @@ OSStartHighRdy:
     LWI     r2,  r1, STK_OFFSET_R02
 
     LWI     r3,  r1, STK_OFFSET_RMSR    /* Get the saved RMSR                                          */
-	 ANDNI   r3,  r3, CPU_IE_BIT         /* Clear the IE bit (It will be set by the return from INT.)   */
+     ANDNI   r3,  r3, CPU_IE_BIT         /* Clear the IE bit (It will be set by the return from INT.)   */
     MTS     RMSR,r3
     LWI     r3,  r1, STK_OFFSET_R03     /* Restore R3 (was used a scratchpad register for RMSR)        */
 

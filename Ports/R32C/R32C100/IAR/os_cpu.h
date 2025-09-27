@@ -3,7 +3,7 @@
 *                                              uC/OS-II
 *                                        The Real-Time Kernel
 *
-*                    Copyright 1992-2020 Silicon Laboratories Inc. www.silabs.com
+*                    Copyright 1992-2021 Silicon Laboratories Inc. www.silabs.com
 *
 *                                 SPDX-License-Identifier: APACHE-2.0
 *
@@ -21,7 +21,7 @@
 *                                           Renesas R32C Port
 *
 * Filename  : os_cpu.h
-* Version   : V2.93.00
+* Version   : V2.93.01
 *********************************************************************************************************
 * For       : Renesas R32C
 * Toolchain : IAR IDE
@@ -88,7 +88,7 @@ typedef unsigned int   OS_CPU_SR;                               /* Type of CPU s
 
 #if      OS_CRITICAL_METHOD == 3
 #define  OS_ENTER_CRITICAL()  {cpu_sr = OS_CPU_SR_Save();}      /* Disable interrupts                  */
-#define  OS_EXIT_CRITICAL()   {OS_CPU_SR_Restore(cpu_sr);} 	    /* Enable  interrupts                  */
+#define  OS_EXIT_CRITICAL()   {OS_CPU_SR_Restore(cpu_sr);}         /* Enable  interrupts                  */
 #endif
 
 /*

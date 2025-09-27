@@ -3,7 +3,7 @@
 *                                              uC/OS-II
 *                                        The Real-Time Kernel
 *
-*                    Copyright 1992-2020 Silicon Laboratories Inc. www.silabs.com
+*                    Copyright 1992-2021 Silicon Laboratories Inc. www.silabs.com
 *
 *                                 SPDX-License-Identifier: APACHE-2.0
 *
@@ -21,7 +21,7 @@
 *                                             TI C28x Port
 *
 * Filename  : os_cpu_c.c
-* Version   : V2.93.00
+* Version   : V2.93.01
 *********************************************************************************************************
 * For       : TI C28x
 * Mode      : C28 Object mode
@@ -288,7 +288,7 @@ OS_STK  *OSTaskStkInit (void   (*task)(void  *p_arg),
     *p_stk32++ = 0x00000000;                                    /*   STF                                                */
     *p_stk32++ = 0x00000000;                                    /*   RB                                                 */
 #endif
-    														    /* Return pointer to next free location.                */
+                                                                /* Return pointer to next free location.                */
     return ((OS_STK *)p_stk32);
 }
 
@@ -369,4 +369,3 @@ void  OSTimeTickHook (void)
 #endif
 }
 #endif
-

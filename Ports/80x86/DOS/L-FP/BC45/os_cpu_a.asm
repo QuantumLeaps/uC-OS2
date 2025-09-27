@@ -2,7 +2,7 @@
 ;                                              uC/OS-II
 ;                                        The Real-Time Kernel
 ;
-;                    Copyright 1992-2020 Silicon Laboratories Inc. www.silabs.com
+;                    Copyright 1992-2021 Silicon Laboratories Inc. www.silabs.com
 ;
 ;                                 SPDX-License-Identifier: APACHE-2.0
 ;
@@ -19,7 +19,7 @@
 ;                                          Borland C/C++ V4.51
 ;
 ; Filename : os_cpu_a.asm
-; Version  : V2.93.00
+; Version  : V2.93.01
 ;********************************************************************************************************
 
             PUBLIC _OSStartHighRdy
@@ -350,7 +350,7 @@ _OSTickISR  PROC   FAR
             MOV    DS, AX
             INC    BYTE PTR DS:_OSIntNesting        ; Notify uC/OS-II of ISR
 ;
-            CMP    BYTE PTR DS:_OSIntNesting, 1	    ; if (OSIntNesting == 1)
+            CMP    BYTE PTR DS:_OSIntNesting, 1        ; if (OSIntNesting == 1)
             JNE    SHORT _OSTickISR1
             MOV    AX, SEG(_OSTCBCur)               ;     Reload DS
             MOV    DS, AX

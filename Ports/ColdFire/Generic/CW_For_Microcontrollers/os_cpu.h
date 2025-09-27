@@ -3,7 +3,7 @@
 *                                              uC/OS-II
 *                                        The Real-Time Kernel
 *
-*                    Copyright 1992-2020 Silicon Laboratories Inc. www.silabs.com
+*                    Copyright 1992-2021 Silicon Laboratories Inc. www.silabs.com
 *
 *                                 SPDX-License-Identifier: APACHE-2.0
 *
@@ -21,7 +21,7 @@
 *                                        ColdFire Specific code
 *
 * Filename : os_cpu.h
-* Version  : V2.93.00
+* Version  : V2.93.01
 *********************************************************************************************************
 */
 
@@ -85,7 +85,7 @@ typedef unsigned  short OS_CPU_SR;          /* Define size of CPU status registe
 
 
 #if      OS_CRITICAL_METHOD == 3
-#define  OS_ENTER_CRITICAL()  (cpu_sr = OS_CPU_SR_Save())	 /* Disable interrupts                     */
+#define  OS_ENTER_CRITICAL()  (cpu_sr = OS_CPU_SR_Save())     /* Disable interrupts                     */
 
 #define  OS_EXIT_CRITICAL()   (OS_CPU_SR_Restore(cpu_sr))    /* Enable  interrupts                     */
 
@@ -116,10 +116,9 @@ OS_CPU_SR  OS_CPU_SR_Save(void);
 void       OS_CPU_SR_Restore(OS_CPU_SR cpu_sr);
 #endif
 
-void 	   OSStartHighRdy(void);
-void 	   OSIntCtxSw(void);
-void 	   OSCtxSw(void);
+void        OSStartHighRdy(void);
+void        OSIntCtxSw(void);
+void        OSCtxSw(void);
 void       OSInitVBR(void);
 
 #endif
-

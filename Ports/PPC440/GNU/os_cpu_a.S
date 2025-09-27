@@ -3,7 +3,7 @@
 *                                              uC/OS-II
 *                                        The Real-Time Kernel
 *
-*                    Copyright 1992-2020 Silicon Laboratories Inc. www.silabs.com
+*                    Copyright 1992-2021 Silicon Laboratories Inc. www.silabs.com
 *
 *                                 SPDX-License-Identifier: APACHE-2.0
 *
@@ -22,17 +22,17 @@
 *                                          GNU  C/C++ Compiler
 *
 * Filename  : os_cpu_a.S
-* Version   : V2.93.00
+* Version   : V2.93.01
 *********************************************************************************************************
 */
 
-	.file "os_cpu_a.S"
+    .file "os_cpu_a.S"
 
-	.section ".vectors","ax"
+    .section ".vectors","ax"
 
-#define MACRO0(name) .macro	name
-#define MACRO1(name, param1) .macro	name	param1
-#define MACRO2(name, param1, param2) .macro	name	param1 param2
+#define MACRO0(name) .macro    name
+#define MACRO1(name, param1) .macro    name    param1
+#define MACRO2(name, param1, param2) .macro    name    param1 param2
 #define CONCAT(left,right) left##right
 #define PARAM(param) param
 
@@ -192,7 +192,7 @@
     ori      0, 0, BSP_CriticalIntHandler@l
     mtlr     0
     bc       0x05, 0x04, CRITICAL_CHECK_NESTING          /* Branch if the return address is not in...   */
-	                                                     /* ...the interrupt-handler table              */
+                                                         /* ...the interrupt-handler table              */
     blrl
     b        CRITICAL_RESTORE_CTX
 
@@ -697,82 +697,82 @@ TICK_INC_NESTING:
 * requires support for additional types of exceptions.
 *********************************************************************************************************
 */
-.globl	_vectorbase
+.globl    _vectorbase
 .align  4                              /* 16 bytes alignment to ensure the IVORs are aligned correctly */
 
 _vectorbase:
 
 .org _vectorbase + IVOR0_VAL                            /* "Vector 0x00", Critical interrupt.          */
-	IVOR0:  b     CRITICAL
+    IVOR0:  b     CRITICAL
 
 .org _vectorbase + IVOR1_VAL                            /* "Vector 0x10", Machine Check interrupt.     */
-	IVOR1:  b     NULL_CRITICAL
+    IVOR1:  b     NULL_CRITICAL
 
 
 .org _vectorbase + IVOR2_VAL                            /* "Vector 0x20", Data Storage interrupt.      */
-	IVOR2:  b     NULL_NONCRITICAL
+    IVOR2:  b     NULL_NONCRITICAL
 
 
 .org _vectorbase + IVOR3_VAL                            /* "Vector 0x30", Instruct. Storage interrupt. */
-	IVOR3:  b     NULL_NONCRITICAL
+    IVOR3:  b     NULL_NONCRITICAL
 
 
 .org _vectorbase + IVOR4_VAL                            /* "Vector 0x40", External interrupt.          */
-	IVOR4:  b     NONCRITICAL
+    IVOR4:  b     NONCRITICAL
 
 
 .org _vectorbase + IVOR5_VAL                            /* "Vector 0x50", Alignment interrupt.         */
-	IVOR5:  b     NULL_NONCRITICAL
+    IVOR5:  b     NULL_NONCRITICAL
 
 
 .org _vectorbase + IVOR6_VAL                            /* "Vector 0x60", Program interrupt.           */
-	IVOR6:  b     NULL_NONCRITICAL
+    IVOR6:  b     NULL_NONCRITICAL
 
 
 .org _vectorbase + IVOR7_VAL                            /* " Vector 0x70", FPU Unavailable interrupt.  */
-	IVOR7:  b     NULL_NONCRITICAL
+    IVOR7:  b     NULL_NONCRITICAL
 
 
 .org _vectorbase + IVOR8_VAL                            /* "Vector 0x80", System Call interrupt.       */
-	IVOR8:  b     SYSTEM_CALL_ISR
+    IVOR8:  b     SYSTEM_CALL_ISR
 
 
 .org _vectorbase + IVOR9_VAL                            /* "Vector 0x90", APU Available interrupt.     */
-	IVOR9:  b     NULL_NONCRITICAL
+    IVOR9:  b     NULL_NONCRITICAL
 
 
 .org _vectorbase + IVOR10_VAL                           /* "Vector 0xA0", Decrementer interrupt.       */
-	IVOR10:  b     DEC_ISR
+    IVOR10:  b     DEC_ISR
 
 
 .org _vectorbase + IVOR11_VAL                           /* "Vector 0xB0", FIT interrupt.               */
-	IVOR11:  b     NULL_NONCRITICAL
+    IVOR11:  b     NULL_NONCRITICAL
 
 
 .org _vectorbase + IVOR12_VAL                           /* "Vector 0xC0", Watchdog Timer interrupt.    */
-	IVOR12:  b     NULL_CRITICAL
+    IVOR12:  b     NULL_CRITICAL
 
 
 .org _vectorbase + IVOR13_VAL                           /* "Vector 0xD0", Data TLB Miss interrupt.     */
-	IVOR13:  b     NULL_NONCRITICAL
+    IVOR13:  b     NULL_NONCRITICAL
 
 
 .org _vectorbase + IVOR14_VAL                           /* "Vector 0xE0", Instruct. TLB Miss interr.   */
-	IVOR14:  b     NULL_NONCRITICAL
+    IVOR14:  b     NULL_NONCRITICAL
 
 
 .org _vectorbase + IVOR15_VAL                           /* "Vector 0xF0", Debug interrupt.             */
-	IVOR15:  b     NULL_CRITICAL
+    IVOR15:  b     NULL_CRITICAL
 
 
 .org _vectorbase + 0x0300
-NONCRITICAL:	OS_CPU_ISR_NON_CRITICAL
+NONCRITICAL:    OS_CPU_ISR_NON_CRITICAL
 
 .org _vectorbase + 0x0400
-CRITICAL:	OS_CPU_ISR_CRITICAL
+CRITICAL:    OS_CPU_ISR_CRITICAL
 
 .org _vectorbase + 0x0500
-MACHINE:	OS_NULL_CRITICAL
+MACHINE:    OS_NULL_CRITICAL
 
 .org _vectorbase + 0x0600
 SYSTEM_CALL_ISR: OSCtxSw
@@ -1085,6 +1085,3 @@ OS_CPU_SR_Restore:
 
     mtmsr  3                                            /* Restore the saved MSR                       */
     blr
-
-
-
